@@ -1,6 +1,6 @@
 package practico01;
 
-public class Node<T> {
+public class Node<T extends Comparable> {
     private T info;
     private Node<T> next;
 

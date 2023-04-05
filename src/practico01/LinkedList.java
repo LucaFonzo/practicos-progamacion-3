@@ -5,19 +5,44 @@ Implemente los métodos indicados del esqueleto de Lista desarrollado en Teoría
 (insertFront, extractFront, isEmpty, size, toString). Agregar también el método: T get(index)
 * */
 
+import java.util.Comparator;
 import java.util.Iterator;
 
-public class LinkedList<T> implements Iterable<T> {
+public class LinkedList<T extends Comparable> implements Iterable<T> {
     private Node<T> first;
-
     public LinkedList() {
         this.first = null;
     }
-
     public void insertFront(T info) {
         Node<T> tmp = new Node<T>(info,null);
         tmp.setNext(this.first);
         this.first = tmp;
+    }
+
+    public void insert(T value){
+        Node newNode = new Node(value,null);
+        if (this.first == null){
+            this.first = newNode;
+        }else if (this.first.getInfo().compareTo(newNode.getInfo()) >= 1){
+            newNode.setNext(this.first);
+            this.first = newNode;
+        }
+        else {
+            Node current = this.first;
+            Node tmp = null;
+            while (current != null && current.getInfo().compareTo(newNode.getInfo())  < 0){
+                tmp = current;
+                current = current.getNext();
+            }
+            if (current == null){
+                tmp.setNext(newNode);
+            }else {
+                Node nodoSiguente = tmp.getNext();
+                newNode.setNext(nodoSiguente);
+                tmp.setNext(newNode);
+            }
+
+        }
     }
 
     public T extractFront() {

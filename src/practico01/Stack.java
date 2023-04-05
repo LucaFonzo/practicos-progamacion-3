@@ -8,19 +8,19 @@ misma. Es posible consultar el tope de la pila (sin eliminarlo) utilizando el m�
 último, es posible invertir el orden de los elementos de la pila mediante el método reverse().
 * */
 
-public class Stack<T> {
+public class Stack<T extends Comparable> {
     private LinkedList<T> stack;
 
     public Stack(){
-        this.stack = new LinkedList<T>();
+        this.stack = new LinkedList<>();
     }
 
     public void push(T o){
         this.stack.insertFront(o);
     }
 
-    public void pop(){
-        this.stack.extractFront();
+    public T pop(){
+        return this.stack.extractFront();
     }
 
     public T top(){
