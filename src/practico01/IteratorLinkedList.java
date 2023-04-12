@@ -26,4 +26,8 @@ public class IteratorLinkedList implements Iterator {
         this.current = this.current.getNext();
         return aux.getInfo();
     }
+
+    public Comparable getCurrent() {
+        return this.current.getInfo();
+    }
 }

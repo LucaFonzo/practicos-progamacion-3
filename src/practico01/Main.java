@@ -58,12 +58,16 @@ public class Main {
     * */
     public static  <T extends Comparable> LinkedList createCommonLinkedList(LinkedList<T> list1, LinkedList<T> list2){
         LinkedList<T> newList = new LinkedList<>();
-        for (T i:list1){
-            for(T j:list2){
-                if (i == j){
-                    newList.insert(i);
-                }
-            }
+        IteratorLinkedList iterator1 = list1.iterator();
+        IteratorLinkedList iterator2 = list2.iterator();
+        if (iterator1.getCurrent().compareTo(iterator2.getCurrent()) >= 1){
+            iterator2.next();
+        }else if (iterator2.getCurrent().compareTo(iterator1.getCurrent()) >= 1){
+            iterator1.next();
+        }else if (iterator1.getCurrent().compareTo(iterator2.getCurrent()) == 0) {
+            newList.insertFront((T) iterator1.getCurrent());
+            iterator1.next();
+            iterator2.next();
         }
         return newList;
     }
@@ -103,6 +107,8 @@ public class Main {
     2. ¿Trae algún problema hacerlo recursivo? ¿Cuál?
     3. ¿Qué cambiaría si la estructura fuera una lista en lugar de un arreglo?
     * 1. O(n) ya que siempre debe hacer n accesos de memoria por cada elemento del arreglo
+    * 2. Hacerlo recursivo podria hacer que llene la pila de ejecucion del programa en el sistema
+    * 3. 
     * */
     public static boolean isOrdered(int [] arr,int pos){
         if (pos == arr.length - 1){

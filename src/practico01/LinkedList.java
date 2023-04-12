@@ -131,8 +131,9 @@ public class LinkedList<T extends Comparable> implements Iterable<T> {
         return result;
     }
     @Override
-    public Iterator<T> iterator() {
+    public IteratorLinkedList iterator() {
         return new IteratorLinkedList(this.first);
     }
+
 }
 
