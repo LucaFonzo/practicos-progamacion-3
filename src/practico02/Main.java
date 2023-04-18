@@ -16,11 +16,35 @@ package practico02;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr = { 5,2,7,1,9,6 };
+        //int[] arr = { 5,2,7,1,9,6 };
         //MergeSort mergeSort = new MergeSort();
         //mergeSort.sort(arr);
-        quickSort(arr,0,arr.length - 1);
-        printArr(arr);
+        //quickSort(arr,0,arr.length - 1);
+        //printArr(arr);
+
+        BinarySearchTree tree = new BinarySearchTree();
+        tree.insert(15);
+        tree.insert(5);
+        tree.insert(18);
+        tree.insert(17);
+        tree.insert(20);
+        tree.insert(3);
+        tree.insert(7);
+        tree.insert(2);
+        tree.insert(4);
+        tree.insert(13);
+        tree.insert(9);
+        tree.insert(14);
+
+        tree.delete(2);
+        tree.delete(17);
+        tree.printInOrder();
+
+        System.out.println("Max height: " + tree.getHeight());
+        System.out.println("Frontera: " + tree.getFrontera());
+        System.out.println("Elem at level: " + tree.getElemAtLevel(2));
+        System.out.println("Suma: " + tree.getSuma());
+        System.out.println("Greater Than: " + tree.getGreaterThan(13));
     }
 
     public static void selectionSort(int [] arr){
