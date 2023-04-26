@@ -220,4 +220,59 @@ public class BinarySearchTree {
         }
         return node.getValue();
     }
+    /*
+    * Ejercicio 4
+    Se posee un árbol binario (no de búsqueda), donde los nodos internos están vacíos, mientras
+    que las hojas tienen valores enteros. Se debe implementar un método que recorra el árbol y
+    coloque valores en los nodos vacíos (los nodos internos). El valor de cada nodo interno debe
+    ser igual al valor de su hijo derecho, menos el valor de su hijo izquierdo. En caso de que el
+    nodo tenga un solo hijo, el valor del hijo faltante se reemplaza por un 0. Por ejemplo, tomando
+    como entrada el árbol de la izquierda, el árbol resultante debería quedar con los mismos
+    valores que el de la derecha.
+    * */
+    public void fillInternalNodes(){
+        fillInternalNodes(this.root);
+    }
+    private void fillInternalNodes(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        if (node.getLeft() != null && node.getRight() != null) {
+            node.setValue(node.getRight().getValue() - node.getLeft().getValue());
+        } else if (node.getLeft() == null && node.getRight() != null) {
+            node.setValue(node.getRight().getValue());
+        } else if (node.getRight() == null && node.getLeft() != null) {
+            node.setValue(-node.getLeft().getValue());
+        }
+        fillInternalNodes(node.getLeft());
+        fillInternalNodes(node.getRight());
+    }
+    public ArrayList<String> getWords(int numberOfVowels){
+        ArrayList<String> result = new ArrayList<>();
+        getWords(this.root,"",0,numberOfVowels,result);
+        return result;
+    }
+    private void getWords(TreeNode node,String currentWord,int count,int n,ArrayList<String> result){
+        if (node == null){
+            return;
+        }
+        currentWord += node.getValue();
+        if (isVowel(node.getValue())){
+            count++;
+        }
+        if (node.getLeft() == null && node.getRight() == null){
+            if (count == n){
+                result.add(currentWord);
+            }
+        }else {
+            getWords(node.getLeft(),currentWord,count,n,result);
+            getWords(node.getRight(),currentWord,count,n,result);
+        }
+        if (isVowel(node.getValue())) {
+            count--;
+        }
+    }
+    private boolean isVowel(char c){
+        return c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
 }
