@@ -45,6 +45,7 @@ public class Main {
         System.out.println("Elem at level: " + tree.getElemAtLevel(2));
         System.out.println("Suma: " + tree.getSuma());
         System.out.println("Greater Than: " + tree.getGreaterThan(13));
+        System.out.println("Longest branch: " + tree.getLongestBranch());
     }
 
     public static void selectionSort(int [] arr){

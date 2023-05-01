@@ -1,11 +1,7 @@
 package practico02;
 
-import practico01.Node;
-
 import java.util.ArrayList;
 
-/* TODO: List getLongestBranch()
-* */
 public class BinarySearchTree {
     private TreeNode root;
 
@@ -247,7 +243,32 @@ public class BinarySearchTree {
         fillInternalNodes(node.getLeft());
         fillInternalNodes(node.getRight());
     }
-    public ArrayList<String> getWords(int numberOfVowels){
+    public ArrayList<Integer> getLongestBranch(){
+        if (isEmpty()){
+            return new ArrayList<>();
+        }
+        ArrayList<Integer> leftSide = getLongestBranch(this.root);
+        ArrayList<Integer> rigthSide = getLongestBranch(this.root);
+        if (leftSide.size() > rigthSide.size()){
+            return leftSide;
+        }
+        return rigthSide;
+    }
+    private ArrayList<Integer> getLongestBranch(TreeNode node){
+        if (node == null){
+            return new ArrayList<>();
+        }
+        ArrayList<Integer> leftSide = getLongestBranch(node.getLeft());
+        ArrayList<Integer> rigthSide = getLongestBranch(node.getRight());
+        if (leftSide.size() > rigthSide.size()){
+            leftSide.add(0,node.getValue());
+            return leftSide;
+        }
+        rigthSide.add(0,node.getValue());
+        return rigthSide;
+
+    }
+    /*public ArrayList<String> getWords(int numberOfVowels){
         ArrayList<String> result = new ArrayList<>();
         getWords(this.root,"",0,numberOfVowels,result);
         return result;
@@ -274,5 +295,5 @@ public class BinarySearchTree {
     }
     private boolean isVowel(char c){
         return c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
-    }
+    }*/
 }
